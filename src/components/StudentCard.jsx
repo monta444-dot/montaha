@@ -1,10 +1,23 @@
-
+import {useState} from 'react';
 function StudentCard(props) {
-    const ville = props.Ville || "non renseignèe";
+  const [coordonneesVisibles, setcoordonneesVisibles] = useState(false);
+  function basculerInformations(){
+    setcoordonneesVisibles(!coordonneesVisibles);
+  }
+
+
+  const ville = props.Ville || "non renseignèe";
+
   return (
     <>
-      <div className="container">
-        <div className="card">
+      <div className="student-card">
+
+        <button onClick={basculerInformations}>
+          {coordonneesVisibles 
+            ? 'Masquer les informations'
+            : 'Afficher les informations'}
+        </button>
+        
           <img
             src={props.image}
             alt="Photo de l'étudiante"
@@ -23,11 +36,11 @@ function StudentCard(props) {
           </p>
 
           <p>
-            <strong>Téléphone :</strong> {props.Téléphone}
+            <strong>Téléphone :</strong> {props.Telephone}
           </p>
 
           <p>
-            <strong>Filière :</strong> {props.Filière}
+            <strong>Filière :</strong> {props.Filiere}
           </p>
 
           <p>
@@ -39,13 +52,13 @@ function StudentCard(props) {
           </p>
 
           <p>
-            <strong>Ville :</strong> {Ville}
+            <strong>Ville :</strong> {ville}
           </p>
 
-          <a href={`mailto:${etudiant.Email}`}>
+          <a href={`mailto:${props.Email}`}>
             <button className="btn-contacter">Contacter</button>
           </a>
-        </div>
+      
       </div>
     </>
   );
